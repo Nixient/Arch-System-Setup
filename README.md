@@ -9,6 +9,7 @@ This is documentation around my preferred setup of Arch Linux. This is some docu
 We'll start with the basic repeatable setup. Slight variation in Partition structure depending on usage.
 
 ### Table of Contents
+
 1. Partitioning and Mounting
 2. Initializing Arch
 3. Localization and Setup
@@ -20,4 +21,4 @@ I tend to run VM's a bit on the large side and do thin provisioning on whatever 
 
 ## Sources
 
-I took lots of content and guidance from the (Arch Wiki)[https://wiki.archlinux.org/]. I would recommend bookmarking this if you haven't already as it is an invaluable reference for the Linux adventures (Not just Arch!).
+I took lots of content and guidance from the [Arch Wiki](https://wiki.archlinux.org/). I would recommend bookmarking this if you haven't already as it is an invaluable reference for the Linux adventures (Not just Arch!).
