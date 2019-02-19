@@ -8,15 +8,47 @@ This is documentation around my preferred setup of Arch Linux. This is some docu
 ### Table of Contents
 
 1. Basic Setup
-    1. Partitioning and Mounting
-    2. Initializing Arch
-    3. Localization and Setup
-    4. Bootloader Configuraiton (GRUB)
+    1. Network Conncetivity
+    2. Partitioning and Mounting
+    3. Initializing Arch
+    4. Localization and Setup
+    5. Bootloader Configuraiton (GRUB)
     
 2. First Boot Setup
     1. Network Setup
 
 ## 1. Basic Setup
+
+### 1i. Network Connectivity
+
+#### Using DHCP
+
+One of the easiest ways to start with the setup process is to connect the system to a network that provides DHCP and run:
+
+```bash
+dhcpcd
+```
+
+The system will grab an IP Address and will print out the address that it obtained. Once the system obtains an IP, you can check internet connectivity using:
+
+```bash
+ping www.google.com
+```
+
+If you run into trouble above, the following command can help you troubleshoot:
+
+```bash
+# Check to ensure that the interface that you are working with is up
+ip link
+# Check to ensure that you have a valid IP address on the expected network
+ip addr
+# Check to ensure that you have a valid route to the internet
+ip route show
+# Check to see if you can reach the internet via your default gateway
+ping 8.8.8.8
+# Check to see if DNS resolution is functional
+drill www.google.com
+```
 
 We'll start with the basic repeatable setup. Slight variation in Partition structure depending on usage.
 
