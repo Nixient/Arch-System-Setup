@@ -4,7 +4,6 @@ NOTE: This is currently a work in progress.
 
 This is documentation around my preferred setup of Arch Linux. This is some documentation I decided to start early in my exploration into Arch Linux. My background consists mainly of Redhat/Fedora so I tend to lean toward some of the tools that are in use with those distributions.
 
-
 ### Table of Contents
 
 1. Basic Setup
@@ -13,7 +12,6 @@ This is documentation around my preferred setup of Arch Linux. This is some docu
     3. Initializing Arch
     4. Localization and Setup
     5. Bootloader Configuraiton (GRUB)
-    
 2. First Boot Setup
     1. Network Setup
 
@@ -52,6 +50,66 @@ drill www.google.com
 
 We'll start with the basic repeatable setup. Slight variation in Partition structure depending on usage.
 
+### Static using netctl
+
+#### Identify the Interface
+
+First we should identify the interface that you are going to use. Start by running:
+
+```bash
+ip link
+```
+
+The command will return a number of interface depending on how many interfaces were detected on your system. Locate the interface that you want to set the static IP Address on and make a note of its name.
+
+```text
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether ab:cd:ef:01:23:45:67 brd ff:ff:ff:ff:ff:ff
+```
+
+We'll be using interface 2 in the above example, so our interface name will be `enp1s0`.
+
+#### Set our static IP
+
+Now we are going to set our static IP using the IP command. In my example I'm going to set the system to use 10.0.0.100 with a subnet mask of 24 (255.255.255.0).
+
+```bash
+ip address add 10.0.0.100/24 dev eno1
+```
+
+_You must used CIDR notation!_
+
+#### Setting our Default Gateway
+
+Next we are going to set our default gateway. In my example that is 10.0.0.1
+
+```bash
+ip route default via 10.0.0.1 dev enp1s0
+```
+
+#### Setting our DNS Servers
+
+And lastly we are going to set our DNS Servers.
+
+1. Open `/etc/resolv.conf`
+
+    ```bash
+    nano /etc/resolv.conf
+    ```
+
+2. Add the following line for each name server
+
+    ```text
+    nameserver <ip-address>
+    ```
+
+Now, you should be able to reach the internet!
+
+```bash
+ping www.google.com
+```
 
 ## 2. First Boot Setup
 
